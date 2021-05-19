@@ -17,7 +17,7 @@ public class UserLogin {
         System.out.println("what is your lastname?");
         String lastname = StringNoSpaceChoice();
         System.out.println("what is your phone number");
-        long phoneNumber = scanner.nextLong();
+        //long phoneNumber = PhoneNumberChoice();
         // check the storeCustomerData Array list in User class
         // if the firstname, lastname, and phone number is match, show the entire User information
         // else, print a message that you failed passing the security questions
