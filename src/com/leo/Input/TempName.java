@@ -14,6 +14,7 @@ public class TempName {
         if(value.length() == 0 || value.length() > ("" + Integer.MAX_VALUE).length()) return false;
         String temp = (value.charAt(0) == '-') ? value.substring(1) : value;
 
+        try { Integer.parseInt(temp); } catch (NumberFormatException e) { return false; }
         return IntStream.range(0, temp.length()).allMatch(i -> isDigit(temp.charAt(i))) && temp.length() != 0;
     }
 
@@ -22,12 +23,13 @@ public class TempName {
         String temp;
         for (temp = cin.nextLine(); !isInt(temp); temp = cin.nextLine())
             System.out.println("Please try again. " + (temp.equals("") ? "That" : temp) + " is not a valid integer.\n");
+
         return Integer.parseInt(temp);
     }
     static boolean isDouble(String value) {
         boolean decimal = false;
-        if(value.length() == 0 || value.length() > ("" + Double.MAX_VALUE).length()) return false;
 
+        if(value.length() == 0 || value.length() > ("" + Double.MAX_VALUE).length()) return false;
         for (int i = 0; i < value.length(); i++) {
             if (value.charAt(i) == '.')
                 if (!decimal) decimal = true;
@@ -46,7 +48,7 @@ public class TempName {
     }
 
     static boolean isSzt(String value) {
-        if(value.length() == 0) return false;
+        if(value.length() == 0 || value.length() > ("65535").length()) return false;
         return IntStream.range(0, value.length()).allMatch(i -> isDigit(value.charAt(i)));
     }
 

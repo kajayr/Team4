@@ -1,13 +1,11 @@
 package com.leo.User;
 
-import java.util.Scanner;
-
 import static com.leo.Input.TempName.*;
 
 public class UserLogin {
     LoanGenerator loanApply = new LoanGenerator();
     CreditCard creditCard = new CreditCard();
-    Savings gotoSavings = new Savings();
+    Checking gotoSavings = new Checking();
 
     public void secureLogin() {
         System.out.println("For security reasons, we need some information.");

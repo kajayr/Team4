@@ -2,7 +2,7 @@ package com.leo.User;
 
 import java.util.Scanner;
 
-public class Savings {
+public class Checking {
     Scanner scanner = new Scanner(System.in);
     public void showSavings(User customer){
         System.out.println("You have $" + customer.getSavingsBalance() + " in savings.");
