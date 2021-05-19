@@ -33,7 +33,7 @@ public class TempName {
                 else return false;
             if (!isDigit(value.charAt(i)) && !decimal) value = value.substring(0, i) + value.substring(i-- + 1);
         }
-        return true;
+        return value.length() != 0;
     }
 
     public static double DoubleChoice() {
