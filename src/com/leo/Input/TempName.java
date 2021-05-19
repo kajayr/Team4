@@ -45,6 +45,18 @@ public class TempName {
 
         return temp.charAt(0) > 96 ? (char) (temp.charAt(0) - 32) : temp.charAt(0);
     }*/
+    static boolean hasSpace(String value) {
+        if(value.length() == 0) return true;
+        return IntStream.range(0, value.length()).anyMatch(i -> value.charAt(i) == ' ');
+    }
+
+    public static String StringNoSpaceChoice() {
+        Scanner cin = new Scanner(System.in);
+        String temp;
+        for (temp = cin.nextLine(); hasSpace(temp); temp = cin.nextLine())
+            System.out.println("If your name has spaces, please type as a single word.\n");
+        return temp;
+    }
 
     public static String StringChoice() {
         Scanner cin = new Scanner(System.in);

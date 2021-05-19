@@ -2,6 +2,8 @@ package com.leo.User;
 
 import java.util.Scanner;
 
+import static com.leo.Input.TempName.StringNoSpaceChoice;
+
 public class UserLogin {
     Scanner scanner = new Scanner(System.in);
     LoanGenerator loanApply = new LoanGenerator();
@@ -11,14 +13,14 @@ public class UserLogin {
     public void secureLogin() {
         System.out.println("For security reasons, we need some information.");
         System.out.println("what is your firstname?");
-        String firstname = scanner.next();
+        String firstname = StringNoSpaceChoice();
         System.out.println("what is your lastname?");
-        String lastname = scanner.next();
+        String lastname = StringNoSpaceChoice();
         System.out.println("what is your phone number");
         long phoneNumber = scanner.nextLong();
         // check the storeCustomerData Array list in User class
         // if the firstname, lastname, and phone number is match, show the entire User information
-        // else, sout a message that you failed passing the security questions
+        // else, print a message that you failed passing the security questions
     }
 
     public void greetUser(User customer) {
