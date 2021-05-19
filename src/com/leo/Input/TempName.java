@@ -11,8 +11,9 @@ import static java.lang.Character.isDigit;
 public class TempName {
 
     static boolean isInt(String value) {
-        if(value.length() == 0) return false;
+        if(value.length() == 0 || value.length() > ("" + Integer.MAX_VALUE).length()) return false;
         String temp = (value.charAt(0) == '-') ? value.substring(1) : value;
+
         return IntStream.range(0, temp.length()).allMatch(i -> isDigit(temp.charAt(i))) && temp.length() != 0;
     }
 
@@ -25,7 +26,7 @@ public class TempName {
     }
     static boolean isDouble(String value) {
         boolean decimal = false;
-        if(value.length() == 0) return false;
+        if(value.length() == 0 || value.length() > ("" + Double.MAX_VALUE).length()) return false;
 
         for (int i = 0; i < value.length(); i++) {
             if (value.charAt(i) == '.')
