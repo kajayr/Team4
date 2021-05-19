@@ -2,10 +2,9 @@ package com.leo.User;
 
 import java.util.Scanner;
 
-import static com.leo.Input.TempName.StringNoSpaceChoice;
+import static com.leo.Input.TempName.*;
 
 public class UserLogin {
-    Scanner scanner = new Scanner(System.in);
     LoanGenerator loanApply = new LoanGenerator();
     CreditCard creditCard = new CreditCard();
     Savings gotoSavings = new Savings();
@@ -17,7 +16,7 @@ public class UserLogin {
         System.out.println("what is your lastname?");
         String lastname = StringNoSpaceChoice();
         System.out.println("what is your phone number");
-        //long phoneNumber = PhoneNumberChoice();
+        String phoneNumber = PhoneNumberChoice();
         // check the storeCustomerData Array list in User class
         // if the firstname, lastname, and phone number is match, show the entire User information
         // else, print a message that you failed passing the security questions
@@ -31,7 +30,7 @@ public class UserLogin {
         System.out.println("4- Applying for loan");
         System.out.println("5- Applying for cashback credit card");
         System.out.println("6- Check my cashback credit rewards");
-        int input = scanner.nextInt();
+        int input = IntChoice();
         switch (input) {
             case 1:
                 System.out.println("Your checking balance is $" + customer.getCheckingBalance());
@@ -51,7 +50,6 @@ public class UserLogin {
             case 6:
                 creditCard.predictRewards();
                 break;
-//        }
         }
     }
 }

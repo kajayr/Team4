@@ -31,12 +31,20 @@ public class TempName {
 
     public static int SztChoice() {
         String temp;
-        Scanner cin = new Scanner(System.in);                                       //Init Scanner
+        Scanner cin = new Scanner(System.in);
         for (temp = cin.nextLine(); !isSzt(temp); temp = cin.nextLine())
             System.out.println("Please try again. " + (temp.equals("") ? "That" : temp) + " is not a valid integer.\n");
         return Integer.parseInt(temp);
     }
 
+    public static String PhoneNumberChoice() {
+        Scanner cin = new Scanner(System.in);
+        String temp = cin.nextLine();
+
+        for (int i = 0; i < temp.length(); i++)         //When an none digit is removed, prevent i from iterating
+            if (!isDigit(temp.charAt(i))) temp = temp.substring(0, i) + temp.substring(i-- + 1);
+        return temp.length() == 0 ? "<none>" : temp;
+    }
 /*    public static char CharChoice() {
         String temp;
         Scanner cin = new Scanner(System.in);
@@ -46,7 +54,10 @@ public class TempName {
         return temp.charAt(0) > 96 ? (char) (temp.charAt(0) - 32) : temp.charAt(0);
     }*/
     static boolean hasSpace(String value) {
-        if(value.length() == 0) return true;
+        if(value.length() == 0) {
+            System.out.print("This field is required. ");
+            return true;
+        }
         return IntStream.range(0, value.length()).anyMatch(i -> value.charAt(i) == ' ');
     }
 
