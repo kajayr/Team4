@@ -3,7 +3,7 @@ package com.leo;
 import com.leo.User.OpenAccount;
 import com.leo.User.User;
 import com.leo.User.UserLogin;
-import static com.leo.Input.TempName.*;
+import static com.leo.Input.InputValidation.*;
 
 public class Welcome {
     UserLogin userLogin = new UserLogin();

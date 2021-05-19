@@ -8,14 +8,15 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 import static java.lang.Character.isDigit;
 
-public class TempName {
+public class InputValidation {
 
     static boolean isInt(String value) {
         if(value.length() == 0 || value.length() > ("" + Integer.MAX_VALUE).length()) return false;
         String temp = (value.charAt(0) == '-') ? value.substring(1) : value;
 
         try { Integer.parseInt(temp); } catch (NumberFormatException e) { return false; }
-        return IntStream.range(0, temp.length()).allMatch(i -> isDigit(temp.charAt(i))) && temp.length() != 0;
+        int bound = temp.length();
+        return IntStream.range(0, bound).allMatch(i -> isDigit(temp.charAt(i))) && temp.length() != 0;
     }
 
     public static int IntChoice() {

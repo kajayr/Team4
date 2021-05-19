@@ -1,6 +1,6 @@
 package com.leo.User;
 
-import static com.leo.Input.TempName.*;
+import static com.leo.Input.InputValidation.*;
 
 public class UserLogin {
     LoanGenerator loanApply = new LoanGenerator();

@@ -1,0 +1,10 @@
+<import last row of CR.txt> <username> <password>
+<import last row of CR.txt> <username> <password>
+<import last row of CR.txt> <username> <password>
+<import last row of CR.txt> <username> <password>
+<import last row of CR.txt> <username> <password>
+<import last row of CR.txt> <username> <password>
+<import last row of CR.txt> <username> <password>
+<import last row of CR.txt> <username> <password>
+<import last row of CR.txt> <username> <password>
+<import last row of CR.txt> <username> <password>
