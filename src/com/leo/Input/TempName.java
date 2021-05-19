@@ -5,43 +5,39 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.stream.IntStream;
 import static java.lang.Character.isDigit;
 
 public class TempName {
 
     static boolean isInt(String value) {
+        if(value.length() == 0) return false;
         String temp = (value.charAt(0) == '-') ? value.substring(1) : value;
-        for (int i = 0; i < temp.length(); i++)
-            if (!isDigit(temp.charAt(i))) return true;
-        return temp.length() == 0;
+        return IntStream.range(0, temp.length()).allMatch(i -> isDigit(temp.charAt(i))) && temp.length() != 0;
     }
 
-    static int IntChoice() {
-        Scanner cin = new Scanner(System.in);                                       //Init Scanner
+    public static int IntChoice() {
+        Scanner cin = new Scanner(System.in);
         String temp;
-        for (temp = cin.nextLine(); isInt(temp); temp = cin.nextLine())
-            if (isInt(temp))
-                System.out.println("Please try again. " + (temp.equals("") ? "That" : temp) + " is not a valid integer.\n");
+        for (temp = cin.nextLine(); !isInt(temp); temp = cin.nextLine())
+            System.out.println("Please try again. " + (temp.equals("") ? "That" : temp) + " is not a valid integer.\n");
         return Integer.parseInt(temp);
     }
 
     static boolean isSzt(String value) {
-        for (int i = 0; i < value.length(); i++)
-            if (!isDigit(value.charAt(i))) return true;
-        return value.length() == 0;
+        if(value.length() == 0) return false;
+        return IntStream.range(0, value.length()).allMatch(i -> isDigit(value.charAt(i)));
     }
 
-    static int SztChoice() {
+    public static int SztChoice() {
         String temp;
         Scanner cin = new Scanner(System.in);                                       //Init Scanner
-        for (temp = cin.nextLine(); isSzt(temp); temp = cin.nextLine())
-            if (isSzt(temp))
-                System.out.println("Please try again. " + (temp.equals("") ? "That" : temp) + " is not a valid integer.\n");
+        for (temp = cin.nextLine(); !isSzt(temp); temp = cin.nextLine())
+            System.out.println("Please try again. " + (temp.equals("") ? "That" : temp) + " is not a valid integer.\n");
         return Integer.parseInt(temp);
     }
 
-/*    static char CharChoice() {
+/*    public static char CharChoice() {
         String temp;
         Scanner cin = new Scanner(System.in);
         for (temp = cin.nextLine(); temp.length() != 1 || (temp.charAt(0) != 'X' && temp.charAt(0) != 'O'); temp = cin.nextLine())
@@ -50,7 +46,7 @@ public class TempName {
         return temp.charAt(0) > 96 ? (char) (temp.charAt(0) - 32) : temp.charAt(0);
     }*/
 
-    static String StringChoice() {
+    public static String StringChoice() {
         Scanner cin = new Scanner(System.in);
         String temp;
         for (temp = cin.nextLine(); temp.length() == 0; temp = cin.nextLine())
@@ -58,7 +54,7 @@ public class TempName {
         return temp;
     }
 
-    static ArrayList<String> ReadAFile(Path file) throws IOException {
+    public static ArrayList<String> ReadAFile(Path file) throws IOException {
         ArrayList<String> buffer = new ArrayList<>();
         if(Files.isReadable(file))
             Files.lines(file).forEach(buffer::add);
