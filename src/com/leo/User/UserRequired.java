@@ -4,8 +4,8 @@ public interface UserRequired {
     String getFirstName();
     String getLastName();
     String getAddress();
-    long getPhoneNumber();
-    int getSalary();
+    String getPhoneNumber();
+    double getSalary();
     int getSavingsBalance();
     int getCheckingBalance();
     String getCreditScore();

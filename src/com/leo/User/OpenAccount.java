@@ -2,6 +2,8 @@ package com.leo.User;
 
 import java.util.Scanner;
 
+import static com.leo.Input.TempName.*;
+
 public class OpenAccount {
     public void openAccount(User customer){
         Scanner scanner = new Scanner(System.in);
@@ -10,19 +12,15 @@ public class OpenAccount {
         System.out.println("First We need some information from you in order to create your account");
         while(!isDone){
             System.out.println("What is your first name?");
-            String name = scanner.next();
-            customer.setFirstName(name);
+            customer.setFirstName(StringNoSpaceChoice());
             System.out.println("What is your last name?");
-            String lastname = scanner.next();
-            customer.setLastName(lastname);
+            customer.setLastName(StringNoSpaceChoice());
             System.out.println("What is your address?");
-            String address = scanner.next();
-            customer.setAddress(address);
+            customer.setAddress(StringChoice());
             System.out.println("What is your phone number?");
-            long phoneNumber = scanner.nextLong();
-            customer.setPhoneNumber(phoneNumber);
+            customer.setPhoneNumber(PhoneNumberChoice());
             System.out.println("How much is your salary?");
-            int salary = scanner.nextInt();
+            double salary = DoubleChoice();
             customer.setSalary(salary);
             System.out.println("Thank you, let's review your information");
             System.out.println(customer);

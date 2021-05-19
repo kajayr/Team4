@@ -6,8 +6,8 @@ public class User implements UserRequired{
     private String firstName;
     private String lastName;
     private String address;
-    private long phoneNumber;
-    private int salary;
+    private String phoneNumber;
+    private double salary;
     private int savingsBalance;
     private int checkingBalance;
     private String creditScore = "Good";
@@ -15,7 +15,7 @@ public class User implements UserRequired{
     public User(){
 
     }
-    public User(String firstName, String lastName, String address, long phoneNumber, int salary, int savingsBalance, int checkingBalance, String creditScore) {
+    public User(String firstName, String lastName, String address, String phoneNumber, int salary, int savingsBalance, int checkingBalance, String creditScore) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -51,19 +51,19 @@ public class User implements UserRequired{
         this.address = address;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 

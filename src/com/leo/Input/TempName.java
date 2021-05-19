@@ -23,6 +23,26 @@ public class TempName {
             System.out.println("Please try again. " + (temp.equals("") ? "That" : temp) + " is not a valid integer.\n");
         return Integer.parseInt(temp);
     }
+    static boolean isDouble(String value) {
+        boolean decimal = false;
+        if(value.length() == 0) return false;
+
+        for (int i = 0; i < value.length(); i++) {
+            if (value.charAt(i) == '.')
+                if (!decimal) decimal = true;
+                else return false;
+            if (!isDigit(value.charAt(i)) && !decimal) value = value.substring(0, i) + value.substring(i-- + 1);
+        }
+        return true;
+    }
+
+    public static double DoubleChoice() {
+        Scanner cin = new Scanner(System.in);
+        String temp = cin.nextLine();
+        if(isDouble(temp)) return Double.parseDouble(temp);
+
+        return 0;
+    }
 
     static boolean isSzt(String value) {
         if(value.length() == 0) return false;
@@ -73,7 +93,7 @@ public class TempName {
         Scanner cin = new Scanner(System.in);
         String temp;
         for (temp = cin.nextLine(); temp.length() == 0; temp = cin.nextLine())
-            System.out.println("Please try again. That is not a valid string.\n");
+            System.out.println("For Tax Purposes, this is a required field. Please try again. That is not a valid string.\n");
         return temp;
     }
 
