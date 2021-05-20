@@ -18,14 +18,15 @@ public class User implements Required {
 
     public User(){
     }
-    public User(String firstName, String lastName, String address, String phoneNumber, int salary, int checkingBalance, String creditScore) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.salary = salary;
-        this.checkingBalance = checkingBalance;
-        this.creditScore = creditScore;
+    public User(ArrayList<String> user) {
+        index = Integer.parseInt(user.get(0));
+        firstName = user.get(1);
+        lastName = user.get(2);
+        address = user.get(3);
+        phoneNumber = user.get(4);
+        salary = Double.parseDouble(user.get(5));
+        checkingBalance = Integer.parseInt(user.get(6));
+        creditScore = user.get(7);
     }
     public String getLogin() {
         return login;

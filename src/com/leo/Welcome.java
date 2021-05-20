@@ -4,24 +4,27 @@ import com.leo.User.Login;
 import com.leo.User.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.leo.Input.InputValidation.*;
 
 public class Welcome {
     Login login = new Login();
 
-    public void welcomeMessage(){
-
+    public void welcomeMessage() {
         System.out.println("Welcome to Bank NotAScam");
         System.out.println("This is Team4, your virtual assistant. How can I help you today?");
         System.out.println("Press a number in the list to continue the process");
-        for (int index = 0; index == 0;) {
+        int index;
+        for (index = 0; index == 0; ) {
             System.out.println("1- Setup a new account");
             System.out.println("2- Login");
             int input = SztChoice();
-            if(input == 1) index = openAccount();
-            if(input == 2) index = login.secureLogin();
+            if (input == 1) index = openAccount();
+            if (input == 2) index = login.secureLogin();
         }
+        try { LoadUserData(index); } catch (IOException ignored) {}
 
     }
     public int openAccount() {

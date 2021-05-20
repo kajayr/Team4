@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 import static java.lang.Character.isDigit;
@@ -163,6 +165,11 @@ public class InputValidation {
         if(Files.isReadable(file))
             Files.lines(file).forEach(buffer::add);
         return buffer;
+    }
+
+    public static void LoadUserData(int index) throws IOException {
+        Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
+        new User(new ArrayList<>(Arrays.asList(Files.readAllLines(file).get(index).split(","))));
     }
 
 }
