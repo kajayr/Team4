@@ -4,27 +4,27 @@ import java.util.Scanner;
 
 public class Checking {
     Scanner scanner = new Scanner(System.in);
-    public void showSavings(User customer){
-        System.out.println("You have $" + customer.getSavingsBalance() + " in savings.");
-        System.out.println("Is there anything else you would like to do regarding to your savings account?");
-        System.out.println("1- Add to savings");
-        System.out.println("2- Withdrawal from savings");
-        System.out.println("3- Go Back");
+    public void showChecking(User customer){
+        System.out.println("You have $" + customer.getCheckingBalance() + " in this account.");
+        System.out.println("Is there anything else you would like to do?");
+        System.out.println("0- Go Back");
+        System.out.println("1- Deposit");
+        System.out.println("2- Withdrawal");
         int input = scanner.nextInt();
-        if(input == 3){
+        if(input == 0){
            // userLogin.greetUser(customer);
         }
         if(input == 1){
-            System.out.println("How much would you like to add to your Savings?");
+            System.out.println("How much would you like to add?");
             int cash = scanner.nextInt();
-            customer.setSavingsBalance(cash);
-            System.out.println("$" + cash + " has been successfully added to your Savings. Your new balance is " + customer.getSavingsBalance());
+            customer.setCheckingBalance(cash);
+            System.out.println("$" + cash + " has been successfully added. Your new balance is " + customer.getCheckingBalance());
         }
         if(input == 2){
-            System.out.println("How much would you like to withdrawal from your Savings?");
+            System.out.println("How much would you like to withdrawal?");
             int cash = scanner.nextInt();
-            customer.setSavingsBalance(cash * -1);
-            System.out.println("$" + cash + " has been successfully added to your Savings. Your new balance is " + customer.getSavingsBalance());
+            customer.setCheckingBalance(cash * -1);
+            System.out.println("$" + cash + " has been successfully added. Your new balance is " + customer.getCheckingBalance());
         }
     }
 }

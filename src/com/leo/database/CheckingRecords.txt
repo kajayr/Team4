@@ -1,4 +1,0 @@
-<index> Date, Transaction Name,     Deposit,    Withdrawl, Balance
-    3/20/2021	Supercharger Use				 $7.54  	-$1,094.58
-    3/21/2021	Travaughn		    $360.22 			    -$734.36
-    3/21/2021	Travaughn			$150.00 	        	-$584.36

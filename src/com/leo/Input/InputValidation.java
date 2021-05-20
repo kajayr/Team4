@@ -1,8 +1,11 @@
 package com.leo.Input;
 
+import com.leo.User.User;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -69,6 +72,34 @@ public class InputValidation {
             if (!isDigit(temp.charAt(i))) temp = temp.substring(0, i) + temp.substring(i-- + 1);
         return temp.length() == 0 ? "<none>" : temp;
     }
+
+    private static boolean isEmail(String value) {
+        boolean at = false, dot = false;
+
+        if(value.length() == 0) return false;
+        for (int i = 0; i < value.length(); i++) {
+            if (value.charAt(i) == '@')
+                if (i > 0 && value.charAt(i-1) != '.' && !at) {
+                    at = true;
+                    dot = false;
+                }
+                else return false;
+            if (value.charAt(i) == '.' && at)
+                if (value.charAt(i - 1) != '@' && !dot) dot = true;
+            else return false;
+        }
+        return at && dot;
+    }
+
+    public static String EmailChoice() {
+        Scanner cin = new Scanner(System.in);
+        String temp;
+
+        for (temp = cin.nextLine(); !isEmail(temp); temp = cin.nextLine())
+            System.out.println("Please try again. " + (temp.equals("") ? "That" : temp) + " is not a valid email.\n");
+        return temp;
+        }
+
 /*    public static char CharChoice() {
         String temp;
         Scanner cin = new Scanner(System.in);
@@ -82,14 +113,14 @@ public class InputValidation {
             System.out.print("This field is required. ");
             return true;
         }
-        return IntStream.range(0, value.length()).anyMatch(i -> value.charAt(i) == ' ');
+        return IntStream.range(0, value.length()).anyMatch(i -> value.charAt(i) == ' ' || value.charAt(i) == ',');
     }
 
     public static String StringNoSpaceChoice() {
         Scanner cin = new Scanner(System.in);
         String temp;
         for (temp = cin.nextLine(); hasSpace(temp); temp = cin.nextLine())
-            System.out.println("If your name has spaces, please type as a single word.\n");
+            System.out.println("Please try again. This time without spaces or commas.\n");
         return temp;
     }
 
@@ -101,10 +132,35 @@ public class InputValidation {
         return temp;
     }
 
-    public static ArrayList<String> ReadAFile(Path file) throws IOException {
+    public static void appendNewUserToLoginRecords(User user) throws IOException {
+        Path file = Path.of("Team4/src/com/leo/database/LoginRecords.csv");
+
+        System.out.println(Files.writeString(file,
+        String.format("%d,%s,%s\n", ReadCheckingRecords().size(), user.getLogin(), user.getPassword()),
+            StandardOpenOption.APPEND).toAbsolutePath());
+    }
+
+    public static ArrayList<String> ReadLoginRecords() throws IOException {
+        Path file = Path.of("Team4/src/com/leo/database/LoginRecords.csv");
         ArrayList<String> buffer = new ArrayList<>();
         if(Files.isReadable(file))
             Files.lines(file).forEach(buffer::add);
         return buffer;
     }
+
+    public static void appendNewUserToCheckingRecords(User user) throws IOException {
+        Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
+        System.out.println(Files.writeString(file,
+        String.format("%d,%s,%s,%s,%s,%s,%s,%s\n", ReadCheckingRecords().size(), user.getFirstName(), user.getLastName(), user.getPhoneNumber(),
+        user.getAddress(), user.getSalary(), user.getCheckingBalance(), user.getCreditScore()), StandardOpenOption.APPEND).toAbsolutePath());
+    }
+
+    public static ArrayList<String> ReadCheckingRecords() throws IOException {
+        Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
+        ArrayList<String> buffer = new ArrayList<>();
+        if(Files.isReadable(file))
+            Files.lines(file).forEach(buffer::add);
+        return buffer;
+    }
+
 }

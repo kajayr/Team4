@@ -2,30 +2,45 @@ package com.leo.User;
 
 import java.util.ArrayList;
 
-public class User implements UserRequired{
+public class User implements Required {
     private String firstName;
     private String lastName;
     private String address;
     private String phoneNumber;
     private double salary;
-    private int savingsBalance;
     private int checkingBalance;
     private String creditScore = "Good";
     public ArrayList<Object> storeCustomer = new ArrayList<>();
-    public User(){
+    private String login;
+    private String email;
+    private String password;
 
+    public User(){
     }
-    public User(String firstName, String lastName, String address, String phoneNumber, int salary, int savingsBalance, int checkingBalance, String creditScore) {
+    public User(String firstName, String lastName, String address, String phoneNumber, int salary, int checkingBalance, String creditScore) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.salary = salary;
-        this.savingsBalance = savingsBalance;
         this.checkingBalance = checkingBalance;
         this.creditScore = creditScore;
     }
+    public String getLogin() {
+        return login;
+    }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -67,14 +82,6 @@ public class User implements UserRequired{
         this.salary = salary;
     }
 
-    public int getSavingsBalance() {
-        return savingsBalance;
-    }
-
-    public void setSavingsBalance(int savingsBalance) {
-        this.savingsBalance += savingsBalance;
-    }
-
     public int getCheckingBalance() {
         return checkingBalance;
     }
@@ -91,13 +98,20 @@ public class User implements UserRequired{
         this.creditScore = creditScore;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return  "Name: " + firstName + " " + lastName + "\n" +
                 "Address: " + address + "\n" +
                 "Phone number: " + phoneNumber + "\n" +
                 "Salary: " + salary + "\n" +
-                "Savings Balance: " + savingsBalance + "\n" +
                 "Checking Balance: " + checkingBalance + "\n" +
                 "Credit Score: '" + creditScore;
     }
