@@ -132,12 +132,13 @@ public class InputValidation {
         return temp;
     }
 
-    public static void appendNewUserToLoginRecords(User user) throws IOException {
+    public static int appendNewUserToLoginRecords(User user) throws IOException {
         Path file = Path.of("Team4/src/com/leo/database/LoginRecords.csv");
 
         System.out.println(Files.writeString(file,
-        String.format("%d,%s,%s\n", ReadCheckingRecords().size(), user.getLogin(), user.getPassword()),
+        String.format("%d,%s,%s\n", user.index(ReadLoginRecords().size()), user.getLogin(), user.getPassword()),
             StandardOpenOption.APPEND).toAbsolutePath());
+        return user.getIndex();
     }
 
     public static ArrayList<String> ReadLoginRecords() throws IOException {
@@ -148,11 +149,12 @@ public class InputValidation {
         return buffer;
     }
 
-    public static void appendNewUserToCheckingRecords(User user) throws IOException {
+    public static int appendNewUserToCheckingRecords(User user) throws IOException {
         Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
         System.out.println(Files.writeString(file,
         String.format("%d,%s,%s,%s,%s,%s,%s,%s\n", user.index(ReadCheckingRecords().size()), user.getFirstName(), user.getLastName(), user.getPhoneNumber(),
         user.getAddress(), user.getSalary(), user.getCheckingBalance(), user.getCreditScore()), StandardOpenOption.APPEND).toAbsolutePath());
+        return user.getIndex();
     }
 
     public static ArrayList<String> ReadCheckingRecords() throws IOException {
