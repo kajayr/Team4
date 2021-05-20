@@ -6,7 +6,7 @@ public interface Required {
     String getAddress();
     String getPhoneNumber();
     double getSalary();
-    int getCheckingBalance();
+    double getCheckingBalance();
     String getCreditScore();
 
 }

@@ -8,7 +8,7 @@ public class User implements Required {
     private String address;
     private String phoneNumber;
     private double salary;
-    private int checkingBalance;
+    private double checkingBalance;
     private String creditScore = "Good";
     public ArrayList<Object> storeCustomer = new ArrayList<>();
     private String login;
@@ -25,7 +25,7 @@ public class User implements Required {
         address = user.get(3);
         phoneNumber = user.get(4);
         salary = Double.parseDouble(user.get(5));
-        checkingBalance = Integer.parseInt(user.get(6));
+        checkingBalance = Double.parseDouble(user.get(6));
         creditScore = user.get(7);
     }
     public String getLogin() {
@@ -84,11 +84,11 @@ public class User implements Required {
         this.salary = salary;
     }
 
-    public int getCheckingBalance() {
+    public double getCheckingBalance() {
         return checkingBalance;
     }
 
-    public void setCheckingBalance(int checkingBalance) {
+    public void setCheckingBalance(double checkingBalance) {
         this.checkingBalance += checkingBalance;
     }
 

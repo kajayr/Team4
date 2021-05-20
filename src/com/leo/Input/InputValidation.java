@@ -159,6 +159,7 @@ public class InputValidation {
         return user.getIndex();
     }
 
+
     public static ArrayList<String> ReadCheckingRecords() throws IOException {
         Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
         ArrayList<String> buffer = new ArrayList<>();
@@ -167,9 +168,10 @@ public class InputValidation {
         return buffer;
     }
 
-    public static void LoadUserData(int index) throws IOException {
+    public static User LoadUserData(int index) throws IOException {
         Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
-        new User(new ArrayList<>(Arrays.asList(Files.readAllLines(file).get(index).split(","))));
+        return new User(new ArrayList<>(Arrays.asList(Files.readAllLines(file).get(index).split(","))));
+
     }
 
 }

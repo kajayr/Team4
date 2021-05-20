@@ -1,5 +1,7 @@
 package com.leo;
 
+import com.leo.Input.InputValidation;
+import com.leo.User.Checking;
 import com.leo.User.Login;
 import com.leo.User.User;
 
@@ -17,14 +19,34 @@ public class Welcome {
         System.out.println("This is Team4, your virtual assistant. How can I help you today?");
         System.out.println("Press a number in the list to continue the process");
         int index;
-        for (index = 0; index == 0; ) {
-            System.out.println("1- Setup a new account");
-            System.out.println("2- Login");
-            int input = SztChoice();
-            if (input == 1) index = openAccount();
-            if (input == 2) index = login.secureLogin();
+        boolean inUse = true;
+        while(inUse){
+            for (index = 0; index == 0; ) {
+                System.out.println("1- Setup a new account");
+                System.out.println("2- Login");
+                int input = SztChoice();
+                if (input == 1) index = openAccount();
+                if (input == 2) {
+                    index = login.secureLogin();
+
+                }
+            }
+            try {
+
+                User user = LoadUserData(index+1);
+                Checking checking = new Checking();
+                checking.showChecking(user);
+
+            } catch (IOException ignored) {}
+            System.out.println("You have been succesfully logged out." +
+                    "\nType in '0' to close the application");
+            int exit = InputValidation.IntChoice();
+
+            if(exit == 0){
+                inUse = false;
+            }
         }
-        try { LoadUserData(index); } catch (IOException ignored) {}
+
 
     }
     public int openAccount() {
