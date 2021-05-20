@@ -1,7 +1,5 @@
 package com.leo.User;
 
-import com.leo.Input.InputValidation;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,13 +8,10 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Scanner;
+import static com.leo.Input.InputValidation.*;
 
 public class Checking {
-    Scanner scanner = new Scanner(System.in);
-    private Path transactionHistoryPath = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\com\\leo\\database\\TransactionHistory.csv");
+    private final Path transactionHistoryPath = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\com\\leo\\database\\TransactionHistory.csv");
     public void showChecking(User customer) throws IOException {
 
 
@@ -26,7 +21,7 @@ public class Checking {
         System.out.println("1- Deposit");
         System.out.println("2- Withdrawal");
         System.out.println("3- Transfer");
-        int input = scanner.nextInt();
+        int input = IntChoice();
         if(input == 0){
 
         }else if(input == 1){
@@ -41,14 +36,10 @@ public class Checking {
             transfer(customer);
             showChecking(customer);
         }
-
-
     }
 
     private void deposit(User customer) throws IOException {
-
-
-        double cash = scanner.nextDouble();
+        double cash = DoubleChoice();
         customer.setCheckingBalance(cash);
         System.out.println("$" + cash + " has been successfully added. Your new balance is " + customer.getCheckingBalance());
 
@@ -68,28 +59,24 @@ public class Checking {
             System.out.println("Something went wrong please try again later");
         }
 
-        ArrayList<String> records = InputValidation.ReadCheckingRecords();
+        ArrayList<String> records = ReadCheckingRecords();
 
         //Replace string
         String newData = String.format("%d,%s,%s,%s,%s,%s,%s,%s", customer.getIndex(), customer.getFirstName(), customer.getLastName(), customer.getAddress(),
                 customer.getPhoneNumber(), customer.getSalary(), customer.getCheckingBalance(), customer.getCreditScore());
 
-        //Reupload File
+        //ReUpload File
         Path checkingRecordsFile = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
 
         records.set(customer.getIndex(),newData );
         Files.write(checkingRecordsFile,"".getBytes());
 
         //Write line by line the file
-        for(int i=0;i<records.size();i++){
-            String newRecord = records.get(i)+"\n";
-            Files.write(checkingRecordsFile,newRecord.getBytes(),StandardOpenOption.APPEND);
-        }
-
+        for (String record : records)
+            Files.write(checkingRecordsFile, (record + "\n").getBytes(), StandardOpenOption.APPEND);
     }
 
     private void depositSilent(User customer, double cash) throws IOException {
-
         customer.setCheckingBalance(cash);
 
         LocalDateTime myDateObj = LocalDateTime.now();
@@ -108,52 +95,46 @@ public class Checking {
             System.out.println("Something went wrong please try again later");
         }
 
-        ArrayList<String> records = InputValidation.ReadCheckingRecords();
+        ArrayList<String> records = ReadCheckingRecords();
 
         //Replace string
         String newData = String.format("%d,%s,%s,%s,%s,%s,%s,%s", customer.getIndex(), customer.getFirstName(), customer.getLastName(), customer.getAddress(),
                 customer.getPhoneNumber(), customer.getSalary(), customer.getCheckingBalance(), customer.getCreditScore());
 
-        //Reupload File
+        //ReUpload File
         Path checkingRecordsFile = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
 
         records.set(customer.getIndex(),newData );
         Files.write(checkingRecordsFile,"".getBytes());
 
         //Write line by line the file
-        for(int i=0;i<records.size();i++){
-            String newRecord = records.get(i)+"\n";
-            Files.write(checkingRecordsFile,newRecord.getBytes(),StandardOpenOption.APPEND);
-        }
-
+        for (String record : records)
+            Files.write(checkingRecordsFile, (record + "\n").getBytes(), StandardOpenOption.APPEND);
     }
 
     //Returns the amount withdrawn
     public double withdraw(User customer) throws IOException {
-
-        int cash = scanner.nextInt();
+        double cash = DoubleChoice();
 
         if(customer.getCheckingBalance() >= cash){
             customer.setCheckingBalance(cash * -1);
             System.out.println("$" + cash + " has been successfully withdrawn. Your new balance is " + customer.getCheckingBalance());
 
             //Save new balance
-            ArrayList<String> records = InputValidation.ReadCheckingRecords();
+            ArrayList<String> records = ReadCheckingRecords();
             //Replace string
             String newData = String.format("%d,%s,%s,%s,%s,%s,%s,%s", customer.getIndex(), customer.getFirstName(), customer.getLastName(), customer.getAddress(),
                     customer.getPhoneNumber(), customer.getSalary(), customer.getCheckingBalance(), customer.getCreditScore());
 
-            //Reupload File
+            //ReUpload File
             Path checkingRecordsFile = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
 
             records.set(customer.getIndex(),newData );
             Files.write(checkingRecordsFile,"".getBytes());
 
             //Write line by line the file
-            for(int i=0;i<records.size();i++){
-                String newRecord = records.get(i)+"\n";
-                Files.write(checkingRecordsFile,newRecord.getBytes(),StandardOpenOption.APPEND);
-            }
+            for (String record : records)
+                Files.write(checkingRecordsFile, (record + "\n").getBytes(), StandardOpenOption.APPEND);
         }else{
             System.out.println("You have entered an amount that is greater than your current balance");
         }
@@ -162,11 +143,10 @@ public class Checking {
 
     public void transfer(User customer) throws IOException {
         System.out.println("What is the ID of the person who you want to transfer money too?");
-        int id = InputValidation.IntChoice();
+        int id = IntChoice();
 
-        User receive = InputValidation.LoadUserData(id);
+        User receive = LoadUserData(id);
         double cash = withdraw(customer);
         depositSilent(receive,cash);
-
     }
 }
