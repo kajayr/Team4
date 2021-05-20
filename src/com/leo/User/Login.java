@@ -1,18 +1,41 @@
 package com.leo.User;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.leo.Input.InputValidation.*;
 
 public class Login {
 
-    public void secureLogin() {
-        System.out.println("Username: ");
+    public int secureLogin() {      //If successful returns user.index else returns 0
+        ArrayList<String> buffer = new ArrayList<>();
+        try { buffer = ReadLoginRecords(); }
+        catch (IOException ignored) {}
+
+        String[][] records = new String[buffer.size()][3];
+        for(int i = 0; i < buffer.size(); i++) records[i] = buffer.get(i).split(",");
+        //System.out.println(Arrays.deepToString(records));
+
+        System.out.print("Username: ");
         String username = StringNoSpaceChoice();
-        System.out.println("Password: ");
+
+        System.out.print("Password: ");
         String password = StringNoSpaceChoice();
 
-        // check the storeCustomerData Array list in User class
-        // if the firstname, lastname, and phone number is match, show the entire User information
-        // else, print a message that you failed passing the security questions
+        for(int i = 1; i < records.length; i++) {
+            if (records[i][1].matches(username))
+                if(records[i][2].matches(password)) {
+                    System.out.println("Thank You!");
+                    return i;
+                }
+            else System.out.println("Wrong Password.");
+        }
+        System.out.println("Username not found. Please try again.");
+
+        return 0;
     }
 
     public void greetUser(User customer) {
