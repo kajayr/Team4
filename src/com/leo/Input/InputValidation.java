@@ -151,7 +151,7 @@ public class InputValidation {
     public static void appendNewUserToCheckingRecords(User user) throws IOException {
         Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
         System.out.println(Files.writeString(file,
-        String.format("%d,%s,%s,%s,%s,%s,%s,%s\n", ReadCheckingRecords().size(), user.getFirstName(), user.getLastName(), user.getPhoneNumber(),
+        String.format("%d,%s,%s,%s,%s,%s,%s,%s\n", user.index(ReadCheckingRecords().size()), user.getFirstName(), user.getLastName(), user.getPhoneNumber(),
         user.getAddress(), user.getSalary(), user.getCheckingBalance(), user.getCreditScore()), StandardOpenOption.APPEND).toAbsolutePath());
     }
 

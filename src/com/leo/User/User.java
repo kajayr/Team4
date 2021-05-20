@@ -14,6 +14,7 @@ public class User implements Required {
     private String login;
     private String email;
     private String password;
+    private int index;
 
     public User(){
     }
@@ -114,5 +115,14 @@ public class User implements Required {
                 "Salary: " + salary + "\n" +
                 "Checking Balance: " + checkingBalance + "\n" +
                 "Credit Score: '" + creditScore;
+    }
+
+    public int index(int index) {
+        this.index = index;
+        return index;
+    }
+
+    public int getIndex() {
+        return index;
     }
 }

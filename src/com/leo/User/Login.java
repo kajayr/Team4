@@ -1,12 +1,29 @@
 package com.leo.User;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.leo.Input.InputValidation.*;
 
 public class Login {
 
     public void secureLogin() {
+        ArrayList<String> buffer = new ArrayList<>();
+        try { buffer = ReadLoginRecords(); }
+        catch (IOException ignored) {}
+
+        String[][] records = new String[buffer.size()][3];
+        for(int i = 0; i < buffer.size(); i++) records[i] = buffer.get(i).split(",");
+        System.out.println(Arrays.deepToString(records));
+
         System.out.println("Username: ");
         String username = StringNoSpaceChoice();
+
+        //Arrays.stream(records).anyMatch(user -> )
+
         System.out.println("Password: ");
         String password = StringNoSpaceChoice();
 
