@@ -58,37 +58,34 @@ public class Checking {
 
             records.set(customer.getIndex(),newData);
             Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
-            //Files.deleteIfExists(file);
             for (String record : records) Files.write(file, (record + "\n").getBytes(), StandardOpenOption.CREATE);
         } catch (IOException ignored) {}
     }
 
     //Returns the amount withdrawn
     public double withdraw(User customer) throws IOException {
+        double cash;
         System.out.println("How much would you like to withdraw?");
-        double cash = DoubleChoice();
+        cash = DoubleChoice();
 
-        if(customer.getCheckingBalance() >= cash){
+        if (!(customer.getCheckingBalance() >= cash))
+            System.out.println("You have entered an amount that is greater than your current balance");
+        else {
             customer.setCheckingBalance(-cash);
             System.out.println("$" + cash + " has been successfully withdrawn. Your new balance is $" + customer.getCheckingBalance());
 
+            //Replace string
+            String newData = String.format("%d,%s,%s,%s,%s,%s,%s,%s", customer.getIndex(), customer.getFirstName(),
+                    customer.getLastName(), customer.getAddress(), customer.getPhoneNumber(), customer.getSalary(),
+                    customer.getCheckingBalance(), customer.getCreditScore());
+
             //Save new balance
             ArrayList<String> records = ReadCheckingRecords();
-            //Replace string
-            String newData = String.format("%d,%s,%s,%s,%s,%s,%s,%s", customer.getIndex(), customer.getFirstName(), customer.getLastName(), customer.getAddress(),
-                    customer.getPhoneNumber(), customer.getSalary(), customer.getCheckingBalance(), customer.getCreditScore());
-
-            //ReUpload File
-            Path checkingRecordsFile = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
-
             records.set(customer.getIndex(),newData );
-            Files.write(checkingRecordsFile,"".getBytes());
 
             //Write line by line the file
-            for (String record : records)
-                Files.write(checkingRecordsFile, (record + "\n").getBytes(), StandardOpenOption.APPEND);
-        }else{
-            System.out.println("You have entered an amount that is greater than your current balance");
+            Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
+            for (String record : records) Files.write(file, (record + "\n").getBytes(), StandardOpenOption.CREATE);
         }
         return cash;
     }

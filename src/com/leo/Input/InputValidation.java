@@ -42,6 +42,7 @@ public class InputValidation {
                 else return false;
             if (!isDigit(value.charAt(i)) && !decimal) value = value.substring(0, i) + value.substring(i-- + 1);
         }
+        System.out.println("Value: " + value);
         return value.length() != 0;
     }
 
@@ -49,7 +50,6 @@ public class InputValidation {
         Scanner cin = new Scanner(System.in);
         String temp = cin.nextLine();
         if(isDouble(temp)) return Double.parseDouble(temp);
-
         return 0;
     }
 
