@@ -49,7 +49,7 @@ public class Checking {
         try {    //Write info to TransactionalHistory
             String message = ("\n" + customer.getIndex() + "," + formattedDate + ",Deposit," +
                     cash + "," + "0.00," + customer.getCheckingBalance()+","+customer.getFirstName());
-            Files.writeString(transactionHistoryPath, message, StandardOpenOption.APPEND);
+            Files.write(transactionHistoryPath, message.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException ignored) {
             System.out.println("Something went wrong please try again later");
         }
