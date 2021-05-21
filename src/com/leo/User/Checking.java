@@ -22,20 +22,24 @@ public class Checking {
             System.out.println("3- Transfer to another Account");
             System.out.println("4- Buy NOTAS crypto coins ($100,000 per coin)");
             input = IntChoice();
-            if (input == 1) deposit(customer, 0);
+            if (input == 1) deposit(customer, 0,true);
             if (input == 2) withdraw(customer);
             if (input == 3) transfer(customer);
             if (input == 4) System.out.println("Thank you for your purchase. Delivery of NOTAS estimated in 5 years.");
         } while (input != 0);
     }
 
-    private void deposit(User customer, double cash) {
-        if( cash == 0) {
+    private void deposit(User customer, double cash, boolean verbose) {
+        if( verbose == true) {
             System.out.println("How much would you like to deposit?");
             cash = DoubleChoice();
         }
         customer.setCheckingBalance(cash);
-        System.out.println("$" + cash + " has been successfully added. Your new balance is $" + customer.getCheckingBalance());
+
+        if(verbose == true){
+            System.out.println("$" + cash + " has been successfully added. Your new balance is $" + customer.getCheckingBalance());
+        }
+
 
         LocalDateTime myDateObj = LocalDateTime.now();
         DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM/dd/yyyy");
@@ -43,7 +47,7 @@ public class Checking {
 
         try {    //Write info to TransactionalHistory
             String message = ("\n" + customer.getIndex() + "," + formattedDate + ",Deposit," +
-                    cash + "," + "0.00," + customer.getCheckingBalance());
+                    cash + "," + "0.00," + customer.getCheckingBalance()+","+customer.getFirstName());
             Files.writeString(transactionHistoryPath, message, StandardOpenOption.APPEND);
         } catch (IOException ignored) {
             System.out.println("Something went wrong please try again later");
@@ -55,10 +59,12 @@ public class Checking {
                 customer.getCheckingBalance(), customer.getCreditScore());
         try {   //Save checking record to CSV vile
             ArrayList<String> records = ReadCheckingRecords();
-
+            //System.out.println(records.stream().toArray().toString());
             records.set(customer.getIndex(),newData);
             Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
-            for (String record : records) Files.write(file, (record + "\n").getBytes(), StandardOpenOption.CREATE);
+            Files.write(file,"".getBytes());
+            for (String record : records) {Files.write(file, (record + "\n").getBytes(), StandardOpenOption.APPEND);}
+            System.out.println(file.toAbsolutePath());
         } catch (IOException ignored) {}
     }
 
@@ -85,8 +91,10 @@ public class Checking {
 
             //Write line by line the file
             Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
-            for (String record : records) Files.write(file, (record + "\n").getBytes(), StandardOpenOption.CREATE);
+            Files.write(file,"".getBytes());
+            for (String record : records) {Files.write(file, (record + "\n").getBytes(), StandardOpenOption.APPEND);}
         }
+        System.out.println(transactionHistoryPath.toAbsolutePath());
         return cash;
     }
 
@@ -96,6 +104,7 @@ public class Checking {
 
         User receive = LoadUserData(id);
         double cash = withdraw(customer);
-        deposit(receive,cash);
+        deposit(receive,cash,false);
+        System.out.println(transactionHistoryPath.toAbsolutePath());
     }
 }
