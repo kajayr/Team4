@@ -3,6 +3,7 @@ package com.leo.User;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import static com.leo.Input.InputValidation.*;
 
 public class Checking {
-    Path transactionHistoryPath = Path.of("Team4/src/com/leo/database/TransactionHistory.csv");
+    Path transactionHistoryPath = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\leo\\database\\TransactionHistory.csv");
     public void showChecking(User customer) throws IOException {
         System.out.println("You have $" + customer.getCheckingBalance() + " in this account.");
         System.out.println("Is there anything else you would like to do?");
@@ -61,7 +62,7 @@ public class Checking {
             ArrayList<String> records = ReadCheckingRecords();
             //System.out.println(records.stream().toArray().toString());
             records.set(customer.getIndex(),newData);
-            Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
+            Path file = Paths.get(System.getProperty("user.dir") + "Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
             Files.write(file,"".getBytes());
             for (String record : records) {Files.write(file, (record + "\n").getBytes(), StandardOpenOption.APPEND);}
             System.out.println(file.toAbsolutePath());
@@ -74,8 +75,10 @@ public class Checking {
         System.out.println("How much would you like to withdraw?");
         cash = DoubleChoice();
 
-        if (!(customer.getCheckingBalance() >= cash))
+        if (!(customer.getCheckingBalance() >= cash)) {
             System.out.println("You have entered an amount that is greater than your current balance");
+            cash = 0;
+        }
         else {
             customer.setCheckingBalance(-cash);
             System.out.println("$" + cash + " has been successfully withdrawn. Your new balance is $" + customer.getCheckingBalance());
@@ -90,7 +93,7 @@ public class Checking {
             records.set(customer.getIndex(),newData );
 
             //Write line by line the file
-            Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
+            Path file = Paths.get(System.getProperty("user.dir") + "Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
             Files.write(file,"".getBytes());
             for (String record : records) {Files.write(file, (record + "\n").getBytes(), StandardOpenOption.APPEND);}
         }
