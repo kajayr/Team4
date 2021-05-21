@@ -122,7 +122,7 @@ public class InputValidation {
         Scanner cin = new Scanner(System.in);
         String temp;
         for (temp = cin.nextLine(); hasSpace(temp); temp = cin.nextLine())
-            System.out.println("Please try again. This time without spaces or commas.\n");
+            System.out.println("Please try again. This time without spaces or commas.");
         return temp;
     }
 
@@ -171,7 +171,6 @@ public class InputValidation {
     public static User LoadUserData(int index) throws IOException {
         Path file = Path.of("Team4/src/com/leo/database/CheckingRecords.csv");
         return new User(new ArrayList<>(Arrays.asList(Files.readAllLines(file).get(index).split(","))));
-
     }
 
 }

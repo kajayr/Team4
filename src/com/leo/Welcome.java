@@ -15,36 +15,25 @@ public class Welcome {
         System.out.println("Welcome to Bank NotAScam");
         System.out.println("This is Team4, your virtual assistant. How can I help you today?");
         System.out.println("Press a number in the list to continue the process");
-        int index;
-        boolean inUse = true;
-        while(inUse){
-            for (index = 0; index == 0; ) {
-                System.out.println("1- Setup a new account");
-                System.out.println("2- Login");
-                int input = SztChoice();
-                if (input == 1) index = openAccount();
-                if (input == 2) {
-                    index = login.secureLogin();
+        for (int input, index = 0; true; ) {
+            System.out.println("0- Quit Application");
+            System.out.println("1- Setup a new account");
+            System.out.println("2- Login");
+            input = SztChoice();
 
-                }
+            if (input == 0) {
+                System.out.println("Go forth and code good things!");
+                System.exit(0);
             }
+            if (input == 1) index = openAccount();
+            if (input == 2) index = login.secureLogin();
+
             try {
-
-                User user = LoadUserData(index+1);
-                Checking checking = new Checking();
-                checking.showChecking(user);
-
-            } catch (IOException ignored) {}
-            System.out.println("You have been succesfully logged out." +
-                    "\nType in '0' to close the application");
-            int exit = InputValidation.IntChoice();
-
-            if(exit == 0){
-                inUse = false;
-            }
+                User user = LoadUserData(index);
+                new Checking() {{ showChecking(user);}};
+                System.out.println("You have been successfully logged out.");
+            } catch (Exception ignored) {}
         }
-
-
     }
     public int openAccount() {
         System.out.println("Thank you for choosing us. Please select an option: ");

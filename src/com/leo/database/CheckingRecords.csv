@@ -1,5 +1,1 @@
-<index>, First, Last,  Phone,    Address, Balance, Credit Score
-1,null,null,null,null,0.0,100.0,Good
-2,Man,ofSteel,<none>,Krypton,0.0,0,Good
-3,Clark,Kent,<none>,North Pole,0.0,200.0,Good
-4,Teenage,Turtles,<none>,NY Sewers,0.0,0,Good
+<index>, First,Last,Phone,Address,Salary,Balance,Credit Score1,Ronnin,Collins,Earth,19004352900,1000000.0,1200.0,Excellent2,Clark,Kent,<none>,North Pole,0.0,396.0,Good3,Man,ofSteel,<none>,Krypton,0.0,0,Good4,Teenage,Turtles,<none>,NY Sewers,0.0,4.0,Good5,NeverGonna,GiveYouUp,Youtube,5556781234,5000000.0,10000.0,Poor

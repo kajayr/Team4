@@ -22,8 +22,8 @@ public class User implements Required {
         index = Integer.parseInt(user.get(0));
         firstName = user.get(1);
         lastName = user.get(2);
-        address = user.get(3);
-        phoneNumber = user.get(4);
+        phoneNumber = user.get(3);
+        address = user.get(4);
         salary = Double.parseDouble(user.get(5));
         checkingBalance = Double.parseDouble(user.get(6));
         creditScore = user.get(7);
