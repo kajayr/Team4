@@ -32,9 +32,7 @@ public class Welcome {
                 User user = LoadUserData(index);
                 new Checking() {{ showChecking(user);}};
                 System.out.println("You have been successfully logged out.");
-            } catch (Exception exception) {
-                System.out.println(exception);
-            }
+            } catch (Exception ignored) {}
         }
     }
     public int openAccount() {

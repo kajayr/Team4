@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 import static java.lang.Character.isDigit;
@@ -42,14 +41,16 @@ public class InputValidation {
                 else return false;
             if (!isDigit(value.charAt(i)) && !decimal) value = value.substring(0, i) + value.substring(i-- + 1);
         }
-        System.out.println("Value: " + value);
         return value.length() != 0;
     }
 
     public static double DoubleChoice() {
         Scanner cin = new Scanner(System.in);
         String temp = cin.nextLine();
-        if(isDouble(temp)) return Double.parseDouble(temp);
+        if(isDouble(temp)) {
+            System.out.println("Temp: " + temp);
+            return Double.parseDouble(temp);
+        }
         return 0;
     }
 
