@@ -137,7 +137,7 @@ public class InputValidation {
     }
 
     public static int appendNewUserToLoginRecords(User user) throws IOException {
-        Path file = Paths.get(System.getProperty("user.dir") + "Team4\\src\\com\\leo\\database\\LoginRecords.csv");
+        Path file = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\com\\leo\\database\\LoginRecords.csv");
 
         System.out.println(Files.write(file,
         String.format("%d,%s,%s\n", user.index(ReadLoginRecords().size()), user.getLogin(), user.getPassword()).getBytes(),
@@ -146,7 +146,8 @@ public class InputValidation {
     }
 
     public static ArrayList<String> ReadLoginRecords() throws IOException {
-        Path file = Paths.get(System.getProperty("user.dir") + "Team4\\src\\com\\leo\\database\\LoginRecords.csv");
+        Path file = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\com\\leo\\database\\LoginRecords.csv");
+        System.out.println(file.toAbsolutePath());
         ArrayList<String> buffer = new ArrayList<>();
         if(Files.isReadable(file))
             Files.lines(file).forEach(buffer::add);
@@ -154,7 +155,7 @@ public class InputValidation {
     }
 
     public static int appendNewUserToCheckingRecords(User user) throws IOException {
-        Path file = Paths.get(System.getProperty("user.dir") + "Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
+        Path file = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
         System.out.println(Files.write(file,
         String.format("%d,%s,%s,%s,%s,%s,%s,%s\n", user.index(ReadCheckingRecords().size()), user.getFirstName(), user.getLastName(), user.getPhoneNumber(),
         user.getAddress(), user.getSalary(), user.getCheckingBalance(), user.getCreditScore()).getBytes(), StandardOpenOption.APPEND).toAbsolutePath());
@@ -163,7 +164,7 @@ public class InputValidation {
 
 
     public static ArrayList<String> ReadCheckingRecords() throws IOException {
-        Path file = Paths.get(System.getProperty("user.dir") + "Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
+        Path file = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
         ArrayList<String> buffer = new ArrayList<>();
         if(Files.isReadable(file))
             Files.lines(file).forEach(buffer::add);
@@ -171,7 +172,7 @@ public class InputValidation {
     }
 
     public static User LoadUserData(int index) throws IOException {
-        Path file = Paths.get(System.getProperty("user.dir") + "Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
+        Path file = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
         return new User(new ArrayList<>(Arrays.asList(Files.readAllLines(file).get(index).split(","))));
     }
 

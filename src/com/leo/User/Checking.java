@@ -62,7 +62,7 @@ public class Checking {
             ArrayList<String> records = ReadCheckingRecords();
             //System.out.println(records.stream().toArray().toString());
             records.set(customer.getIndex(),newData);
-            Path file = Paths.get(System.getProperty("user.dir") + "Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
+            Path file = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
             Files.write(file,"".getBytes());
             for (String record : records) {Files.write(file, (record + "\n").getBytes(), StandardOpenOption.APPEND);}
             System.out.println(file.toAbsolutePath());
@@ -93,7 +93,7 @@ public class Checking {
             records.set(customer.getIndex(),newData );
 
             //Write line by line the file
-            Path file = Paths.get(System.getProperty("user.dir") + "Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
+            Path file = Paths.get(System.getProperty("user.dir") + "\\Team4\\src\\com\\leo\\database\\CheckingRecords.csv");
             Files.write(file,"".getBytes());
             for (String record : records) {Files.write(file, (record + "\n").getBytes(), StandardOpenOption.APPEND);}
         }
