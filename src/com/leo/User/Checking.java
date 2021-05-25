@@ -26,7 +26,10 @@ public class Checking {
             if (input == 1) deposit(customer, 0,true);
             if (input == 2) withdraw(customer);
             if (input == 3) transfer(customer);
-            if (input == 4) System.out.println("Thank you for your purchase. Delivery of NOTAS estimated in 5 years.");
+            if (input == 4) {
+                System.out.println("Thank you for your purchase. Delivery of NOTAS estimated in 5 years.");
+                withdraw(customer);
+            }
         } while (input != 0);
     }
 

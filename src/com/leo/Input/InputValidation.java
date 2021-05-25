@@ -49,7 +49,6 @@ public class InputValidation {
         Scanner cin = new Scanner(System.in);
         String temp = cin.nextLine();
         if(isDouble(temp)) {
-            System.out.println("Temp: " + temp);
             return Double.parseDouble(temp);
         }
         return 0;
